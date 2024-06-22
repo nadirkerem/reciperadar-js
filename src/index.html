@@ -1,14 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>RecipeRadar</title>
+  <!-- CSS -->
+  <link href="./output.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-
+  <main class="grid lg:grid-cols-5">
+    <div class="hidden lg:col-span-1 lg:block lg:min-h-screen">
+      <!-- SIDEBAR -->
+      <aside class="flex h-full flex-col bg-orange-700 px-8 py-4">
+        <!-- LOGO TEXT -->
+        <h1 class="text-center text-3xl font-bold text- sm:text-4xl text-white">
+          RecipeRadar
+        </h1>
+        <!-- LOGO TEXT -->
+        <div class="mt-20 flex flex-grow flex-col gap-y-6 transition-all text-xl">
+          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+            <i class="fa-solid fa-home"></i>
+            <span>All Recipes</span>
+          </a>
+          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+            <i class="fa-solid fa-user"></i>
+            <span>My Favorite Recipes</span>
+          </a>
+          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Recipe</span>
+          </a>
+          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Surprise Me!</span>
+          </a>
+          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+            <i class="fa-solid fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </div>
+      </aside>
+      <!-- SIDEBAR -->
+    </div>
+    <div class="lg:col-span-4">
+      <nav class="flex items-center justify-between px-8 py-8 sm:px-16 lg:px-24 bg-orange-700">
+        <form>
+          <input type="text" id="first_name" class="pl-4 pr-24 py-1 border rounded-lg" placeholder="Search for recipes"
+            required />
+          <button type="submit" class="border border-white rounded-lg px-1 py-1 hover:scale-110 transition-all ml-3"><i
+              class="fa-solid fa-magnifying-glass text-white"></i></button>
+        </form>
+        <div class="flex items-center gap-x-4">
+        </div>
+      </nav>
+      <div class="px-8 py-16 lg:px-16">
+      </div>
+    </div>
+  </main>
 </body>
 
 </html>
