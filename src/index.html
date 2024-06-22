@@ -23,27 +23,27 @@
           RecipeRadar
         </h1>
         <!-- LOGO TEXT -->
-        <div class="mt-20 flex flex-grow flex-col gap-y-6 transition-all text-xl">
-          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+        <div class="mt-20 flex flex-grow flex-col gap-y-6 text-xl">
+          <button class="flex items-center gap-x-4 text-white hover:text-gray-200 transition-all">
             <i class="fa-solid fa-home"></i>
             <span>All Recipes</span>
-          </a>
-          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+          </button>
+          <button class="flex items-center gap-x-4 text-white hover:text-gray-200 transition-all">
             <i class="fa-solid fa-user"></i>
             <span>My Favorite Recipes</span>
-          </a>
-          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+          </button>
+          <button class="flex items-center gap-x-4 text-white hover:text-gray-200 transition-all">
             <i class="fa-solid fa-plus"></i>
             <span>Add Recipe</span>
-          </a>
-          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+          </button>
+          <button class="flex items-center gap-x-4 text-white hover:text-gray-200 transition-all">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <span>Surprise Me!</span>
-          </a>
-          <a href="#" class="flex items-center gap-x-4 text-white hover:text-gray-200">
+          </button>
+          <button class="flex items-center gap-x-4 text-white hover:text-gray-200 transition-all">
             <i class="fa-solid fa-cog"></i>
             <span>Settings</span>
-          </a>
+          </button>
         </div>
       </aside>
       <!-- SIDEBAR -->
@@ -59,8 +59,44 @@
         <div class="flex items-center gap-x-4">
         </div>
       </nav>
-      <div class="px-8 py-16 lg:px-16">
-      </div>
+      <section class="px-8 py-16 lg:px-16" id="page-content">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" id="recipe-cards-container ">
+          <div class="overflow-hidden shadow-lg flex flex-col">
+            <a href="#"></a>
+            <div class="relative">
+              <img class="w-full" src="../example/kumpir.jpg" alt="Kumpir">
+              <div
+                class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
+              </div>
+              <button
+                class="text-xs absolute top-0 right-0 bg-orange-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-orange-600 transition duration-300">
+                Turkey
+              </button>
+              <button
+                class="text-xs absolute top-0 left-0 bg-orange-600 px-4 py-2 text-white mt-3 ml-3 hover:bg-white hover:text-orange-600 transition duration-300">
+                Side
+              </button>
+            </div>
+            <div class="px-6 py-4 mb-auto">
+              <a href="#"
+                class="font-medium text-lg hover:text-orange-600 transition duration-300 inline-block mb-2">Kumpir</a>
+              <p class="text-gray-500 text-sm">
+                Ingredient list...
+              </p>
+            </div>
+            <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
+              <button
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-800 transition duration-300">
+                See Full Recipe
+              </button>
+              <button
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-800 transition duration-300">
+                Watch Tutorial
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 </body>
