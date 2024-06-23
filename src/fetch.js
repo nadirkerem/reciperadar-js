@@ -1,9 +1,12 @@
 import { shuffle, resetDisplay, displayTitle, capitalize } from './utils.js';
-import { displayCategories, displayRecipe } from './display.js';
+import {
+  displayCategories,
+  displayRecipes,
+  displayRecipesByCategories,
+} from './display.js';
 
 const searchRecipeForm = document.querySelector('#search-recipe-form');
 const searchRecipeInput = searchRecipeForm.elements['recipe-input'];
-const pageContent = document.querySelector('#page-content');
 
 export async function initialFetch() {
   try {
@@ -13,7 +16,7 @@ export async function initialFetch() {
     const recipes = await response.json();
     resetDisplay();
     const shuffledRecipes = shuffle(recipes.meals);
-    shuffledRecipes.forEach((recipe) => displayRecipe(recipe));
+    shuffledRecipes.forEach((recipe) => displayRecipes(recipe));
   } catch (error) {
     console.error(error);
   }
@@ -40,7 +43,7 @@ export async function searchForRecipe(e) {
     displayTitle(`Search Results For: ${capitalize(searchRecipeInput.value)}`);
 
     const shuffledRecipes = shuffle(recipes.meals);
-    shuffledRecipes.forEach((recipe) => displayRecipe(recipe));
+    shuffledRecipes.forEach((recipe) => displayRecipes(recipe));
     searchRecipeInput.value = '';
   } catch (error) {
     console.error(error);
@@ -63,6 +66,21 @@ export async function fetchCategories() {
   }
 }
 
+export async function fetchCategoryRecipes(category) {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+    );
+    const recipes = await response.json();
+    resetDisplay();
+    displayTitle(capitalize(`${category} Recipes`));
+    const shuffledRecipes = shuffle(recipes.meals);
+    shuffledRecipes.forEach((recipe) => displayRecipesByCategories(recipe));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function randomRecipe() {
   try {
     const response = await fetch(
@@ -70,7 +88,7 @@ export async function randomRecipe() {
     );
     const recipe = await response.json();
     resetDisplay();
-    displayRecipe(recipe.meals[0]);
+    displayRecipes(recipe.meals[0]);
   } catch (error) {
     console.error(error);
   }
