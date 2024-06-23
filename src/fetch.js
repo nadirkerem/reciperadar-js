@@ -62,3 +62,16 @@ export async function fetchCategories() {
     console.error(error);
   }
 }
+
+export async function randomRecipe() {
+  try {
+    const response = await fetch(
+      'https://www.themealdb.com/api/json/v1/1/random.php'
+    );
+    const recipe = await response.json();
+    resetDisplay();
+    displayRecipe(recipe.meals[0]);
+  } catch (error) {
+    console.error(error);
+  }
+}
