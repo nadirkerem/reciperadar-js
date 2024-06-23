@@ -1,3 +1,5 @@
+const pageContent = document.querySelector('#page-content');
+
 export function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -7,20 +9,23 @@ export function shuffle(array) {
 }
 
 export function resetDisplay() {
+  if (pageContent.querySelector('h2')) {
+    pageContent.querySelector('h2').remove();
+  }
   const recipeCardsContainer = document.querySelector(
     '#recipe-cards-container'
   );
   recipeCardsContainer.innerHTML = '';
 }
 
-export function displayTitle(title, container) {
-  if (container.querySelector('h2')) {
-    container.querySelector('h2').remove();
+export function displayTitle(title) {
+  if (pageContent.querySelector('h2')) {
+    pageContent.querySelector('h2').remove();
   }
   const titleElement = document.createElement('h2');
   titleElement.className = 'text-2xl font-medium text-center mb-8';
   titleElement.textContent = title;
-  container.prepend(titleElement);
+  pageContent.prepend(titleElement);
 }
 
 export function capitalize(sentence) {

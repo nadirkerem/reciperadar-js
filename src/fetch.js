@@ -1,5 +1,5 @@
 import { shuffle, resetDisplay, displayTitle, capitalize } from './utils.js';
-import { displayRecipe } from './display.js';
+import { displayCategories, displayRecipe } from './display.js';
 
 const searchRecipeForm = document.querySelector('#search-recipe-form');
 const searchRecipeInput = searchRecipeForm.elements['recipe-input'];
@@ -11,12 +11,14 @@ export async function initialFetch() {
       'https://www.themealdb.com/api/json/v1/1/search.php?s=chicken'
     );
     const recipes = await response.json();
+    resetDisplay();
     const shuffledRecipes = shuffle(recipes.meals);
     shuffledRecipes.forEach((recipe) => displayRecipe(recipe));
   } catch (error) {
     console.error(error);
   }
 }
+
 export async function searchForRecipe(e) {
   e.preventDefault();
 
@@ -33,19 +35,28 @@ export async function searchForRecipe(e) {
       alert('No recipe found! Please try another recipe name.');
       return;
     }
-
-    if (pageContent.querySelector('h2')) {
-      pageContent.querySelector('h2').remove();
-    }
-
-    displayTitle(
-      `Search Results For: ${capitalize(searchRecipeInput.value)}`,
-      pageContent
-    );
-
     resetDisplay();
+
+    displayTitle(`Search Results For: ${capitalize(searchRecipeInput.value)}`);
+
     const shuffledRecipes = shuffle(recipes.meals);
     shuffledRecipes.forEach((recipe) => displayRecipe(recipe));
+    searchRecipeInput.value = '';
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchCategories() {
+  try {
+    const response = await fetch(
+      'https://www.themealdb.com/api/json/v1/1/categories.php'
+    );
+    const categories = await response.json();
+
+    resetDisplay();
+    displayTitle('Categories');
+    categories.categories.forEach((category) => displayCategories(category));
     searchRecipeInput.value = '';
   } catch (error) {
     console.error(error);
