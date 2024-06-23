@@ -1,8 +1,9 @@
-import { shuffle, resetDisplay } from './utils.js';
+import { shuffle, resetDisplay, displayTitle, capitalize } from './utils.js';
 import { displayRecipe } from './display.js';
 
 const searchRecipeForm = document.querySelector('#search-recipe-form');
 const searchRecipeInput = searchRecipeForm.elements['recipe-input'];
+const pageContent = document.querySelector('#page-content');
 
 export async function initialFetch() {
   try {
@@ -32,6 +33,15 @@ export async function searchForRecipe(e) {
       alert('No recipe found! Please try another recipe name.');
       return;
     }
+
+    if (pageContent.querySelector('h2')) {
+      pageContent.querySelector('h2').remove();
+    }
+
+    displayTitle(
+      `Search Results For: ${capitalize(searchRecipeInput.value)}`,
+      pageContent
+    );
 
     resetDisplay();
     const shuffledRecipes = shuffle(recipes.meals);

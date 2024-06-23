@@ -14,6 +14,7 @@ export function displayRecipe(recipe) {
     strIngredient5,
     strYoutube,
   } = recipe;
+
   const cardTemplate = document.createElement('div');
   cardTemplate.className = 'overflow-hidden shadow-lg flex flex-col';
   cardTemplate.innerHTML = `
@@ -46,9 +47,9 @@ export function displayRecipe(recipe) {
                 class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-800 transition duration-300">
                 See Full Recipe
               </a>
-              <a href=${strYoutube}
+              <a href=${strYoutube} target="_blank"
                 class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-800 transition duration-300">
-                Watch Tutorial
+                Watch Tutorial <i class="fa-brands fa-youtube"></i>
               </a>
             </div>
           `;
