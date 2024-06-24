@@ -1,3 +1,5 @@
+import { modifyCurrentPage } from './display.js';
+
 const pageContent = document.querySelector('#page-content');
 
 export function shuffle(array) {
@@ -15,7 +17,10 @@ export function resetDisplay() {
   const recipeCardsContainer = document.querySelector(
     '#recipe-cards-container'
   );
+  const paginationContainer = document.querySelector('#pagination-container');
   recipeCardsContainer.innerHTML = '';
+  paginationContainer.innerHTML = '';
+  modifyCurrentPage(1);
 }
 
 export function displayTitle(title) {
