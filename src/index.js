@@ -7,7 +7,7 @@ import {
 } from './fetch.js';
 
 const searchRecipeForm = document.querySelector('#search-recipe-form');
-const logo = document.querySelector('.brand-logo');
+const logo = document.querySelectorAll('.brand-logo');
 const homeButton = document.querySelector('#home-button');
 const categoriesButton = document.querySelector('#categories-button');
 const favoritesButton = document.querySelector('#favorites-button');
@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', initialFetch);
 
 searchRecipeForm.addEventListener('submit', searchForRecipe);
 
-logo.addEventListener('click', initialFetch);
+logo.forEach((logo) => {
+  logo.addEventListener('click', initialFetch);
+});
 
 homeButton.addEventListener('click', initialFetch);
 

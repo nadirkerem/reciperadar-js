@@ -44,7 +44,7 @@ export function createCardTemplate(recipe) {
                 ${strArea}
               </button>
               <button
-                class="text-xs absolute top-0 left-0 bg-orange-600 px-4 py-2 text-white mt-3 ml-3 hover:bg-white hover:text-orange-600 transition duration-300">
+                class="text-xs absolute top-0 left-0 bg-orange-600 px-4 py-2 text-white mt-3 ml-3 hover:bg-white hover:text-orange-600 transition duration-300 category-button">
                 ${strCategory}
               </button>
             ${
@@ -54,8 +54,8 @@ export function createCardTemplate(recipe) {
             }
             </div>
             <div class="px-6 py-4 mb-auto">
-              <a href="#"
-                class="font-medium text-lg hover:text-orange-600 transition duration-300 inline-block mb-2">${strMeal}</a>
+              <button
+                class="font-medium text-lg hover:text-orange-600 transition duration-300 inline-block mb-2 see-recipe-button">${strMeal}</button>
               <p class="text-gray-500 text-sm">
                 ${strIngredient1}, ${strIngredient2}, ${strIngredient3}, ${strIngredient4}, ${strIngredient5}...
               </p>
@@ -84,10 +84,15 @@ export function displayRecipes(recipesArray, pageNumber = 1) {
   const paginatedRecipes = recipesArray.slice(start, end);
   paginatedRecipes.forEach((recipe) => {
     const cardTemplate = createCardTemplate(recipe);
-    cardTemplate
-      .querySelector('.see-recipe-button')
-      .addEventListener('click', () => {
+    cardTemplate.querySelectorAll('.see-recipe-button').forEach((button) => {
+      button.addEventListener('click', () => {
         fetchRecipeDetails(recipe.idMeal);
+      });
+    });
+    cardTemplate
+      .querySelector('.category-button')
+      .addEventListener('click', () => {
+        fetchCategoryRecipes(recipe.strCategory);
       });
     recipeCardsContainer.appendChild(cardTemplate);
   });
