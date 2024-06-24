@@ -65,11 +65,11 @@ export function createCardTemplate(recipe) {
             </div>
             <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
               <button
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300 see-recipe-button">
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition duration-300 see-recipe-button">
                 See Full Recipe
               </button>
               <a href=${strYoutube} target="_blank"
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition duration-300">
                 Watch Tutorial <i class="fab fa-youtube"></i>
               </a>
             </div>
@@ -111,8 +111,8 @@ export function createPaginationButtons(recipesArray, type) {
     const button = document.createElement('button');
     button.className = `px-3 py-2 text-sm font-medium text-center  rounded-lg transition-all duration-300 ring-1 ring-inset ring-gray-300 ${
       currentPage === i
-        ? 'bg-orange-700 hover:bg-orange-800 text-white'
-        : 'hover:bg-gray-50 text-orange-700'
+        ? 'bg-orange-600 hover:bg-orange-700 text-white'
+        : 'hover:bg-gray-50 text-orange-600'
     }`;
     button.textContent = i;
     button.addEventListener('click', () => {
@@ -149,7 +149,7 @@ export function displayCategories(category) {
             </div>
             <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
               <button
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-800 transition duration-300 see-recipes-button">
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition duration-300 see-recipes-button">
                 See Recipes for ${strCategory}
               </button>
             </div>
@@ -208,7 +208,7 @@ export function createCardCategoryRecipeTemplate(recipe) {
               </div>
               <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
                 <button
-                  class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300 see-recipe-button">
+                  class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition duration-300 see-recipe-button">
                   See Full Recipe
                 </button>
               </div>
@@ -320,13 +320,13 @@ export function displayRecipeDetails(recipe) {
             <p class="text-gray-600">${strInstructions}</p>
             <div class="flex items-center gap-x-4">
               <button
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300 ${
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition duration-300 ${
                   isFavorite ? 'remove-favorite-button' : 'add-favorite-button'
                 }">
                 ${isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
               </button>
               <a href="${strYoutube}" target="_blank"
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition duration-300">
                 Watch Tutorial <i class="fa-brands fa-youtube"></i>
               </a>
             </div>
