@@ -262,7 +262,6 @@ export function displayRecipeDetails(recipe) {
           <div class="flex flex-col gap-y-8">
             <h2 class="text-4xl md:text-5xl font-bold">${strMeal}</h2>
             <div class="flex items-center gap-x-4">
-              <span class="text-gray-600">Ingredients:</span>
               <span class="text-orange-700">
               ${strIngredient1 ? `${strIngredient1}: ${strMeasure1},` : ''}
               ${strIngredient2 ? `${strIngredient2}: ${strMeasure2},` : ''}
@@ -283,16 +282,10 @@ export function displayRecipeDetails(recipe) {
               ${strIngredient17 ? `${strIngredient17}: ${strMeasure17},` : ''}
               ${strIngredient18 ? `${strIngredient18}: ${strMeasure18},` : ''}
               ${strIngredient19 ? `${strIngredient19}: ${strMeasure19},` : ''}
-              ${strIngredient20 ? `${strIngredient20}: ${strMeasure20},` : ''}
+              ${strIngredient20 ? `${strIngredient20}: ${strMeasure20}` : ''}
               </span>
             </div>
-
-            
-              
-            
-
             <p class="text-gray-600">${strInstructions}</p>
-
             <div class="flex items-center gap-x-4">
               <a href="#" target="_blank"
                 class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">

@@ -87,7 +87,7 @@ export async function randomRecipe() {
     );
     const recipe = await response.json();
     resetDisplay();
-    displayRecipes(recipe.meals);
+    displayRecipeDetails(recipe.meals[0]);
   } catch (error) {
     console.error(error);
   }
