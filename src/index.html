@@ -21,8 +21,8 @@
       <!-- SIDEBAR -->
       <aside class="flex h-full flex-col bg-orange-700 px-8 py-4">
         <!-- LOGO TEXT -->
-        <button id="logo">
-          <h1 class="text-center text-3xl font-bold text- sm:text-4xl text-white fixed top-5">
+        <button class="brand-logo">
+          <h1 class="text-center text-3xl font-bold sm:text-4xl text-white fixed top-5">
             RecipeRadar
           </h1>
         </button>
@@ -53,13 +53,23 @@
             <span class="flex-grow text-left">Settings</span>
           </button>
         </div>
+        <a href="https://github.com/nadirkerem" target="_blank" class="hidden sm:block"><i
+            class="fa-brands fa-github fixed bottom-3 text-2xl text-white"></i></a>
       </aside>
       <!-- SIDEBAR -->
     </div>
     <div class="lg:col-span-4">
-      <nav class="flex items-center justify-between px-8 py-8 sm:px-16 lg:px-24 bg-orange-700">
+      <nav
+        class="flex items-center justify-between flex-col gap-3 sm:flex-row px-8 py-8 sm:px-16 lg:px-24 bg-orange-700">
+        <!-- LOGO TEXT -->
+        <button class="brand-logo lg:hidden">
+          <h1 class="text-center text-3xl font-bold text-white">
+            RecipeRadar
+          </h1>
+        </button>
+        <!-- LOGO TEXT -->
         <form id="search-recipe-form">
-          <input type="text" id="recipe-input" class="pl-4 pr-24 py-1 border rounded-lg"
+          <input type="text" id="recipe-input" class="pl-4 lg:pr-24 md:pr-16 sm:pr-3 py-1 border rounded-lg"
             placeholder="Search for recipes" required />
           <button type="submit" class="border border-white rounded-lg px-2 py-1 hover:scale-110 transition-all ml-3"><i
               class="fa-solid fa-magnifying-glass text-white"></i></button>
@@ -71,6 +81,48 @@
         <!-- TITLE -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10" id="recipe-cards-container">
           <!-- CARDS -->
+
+
+          <!-- CARDS OR RECIPE -->
+          <!-- recipe details: -->
+          <!-- <div class="w-[500px] md:w-[700px]">
+            <img src="https://via.placeholder.com/700" alt="recipe" class="w-full rounded-lg" />
+          </div>
+          <div class="flex flex-col gap-y-4">
+            <h2 class="text-2xl font-bold">Recipe Title</h2>
+            <div class="flex items-center gap-x-4">
+              <span class="text-gray-600">Category:</span>
+              <span class="text-orange-700">Category Name</span>
+            </div>
+
+            <div class="flex items-center gap-x-4">
+              <span class="text-gray-600">Ingredients:</span>
+              <span class="text-orange-700">
+                Ingredient 1 (Measure 1)
+                Ingredient 2 (Measure 2)
+                Ingredient 3 (Measure 3)
+                Ingredient 4 (Measure 4)
+                Ingredient 5 (Measure 5)..
+              </span>
+            </div>
+
+            <div class="flex items-center gap-x-4">
+              <span class="text-gray-600">Tags:</span>
+              <span class="text-orange-700">Treat,Pudding,Speciality</span>
+            </div>
+
+            <p class="text-gray-600">Recipe Description</p>
+
+            <div class="flex items-center gap-x-4">
+              <a href="#" target="_blank"
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                Add Favorite
+              </a>
+              <a href="#" target="_blank"
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                Watch Tutorial <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div> -->
         </div>
         <!-- PAGINATION -->
         <div class="flex items-center justify-center gap-x-4 sm:px-6 mt-3" id="pagination-container">

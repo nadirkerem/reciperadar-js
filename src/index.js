@@ -6,7 +6,7 @@ import {
 } from './fetch.js';
 
 const searchRecipeForm = document.querySelector('#search-recipe-form');
-const logo = document.querySelector('#logo');
+const logo = document.querySelector('.brand-logo');
 const homeButton = document.querySelector('#home-button');
 const categoriesButton = document.querySelector('#categories-button');
 const surpriseMeButton = document.querySelector('#surprise-me-button');
