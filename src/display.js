@@ -1,5 +1,6 @@
-import { fetchCategoryRecipes } from './fetch.js';
+import { fetchCategoryRecipes, fetchRecipeDetails } from './fetch.js';
 
+const pageContent = document.querySelector('#page-content');
 const recipeCardsContainer = document.querySelector('#recipe-cards-container');
 
 const recipesPerPage = 6;
@@ -49,12 +50,12 @@ export function createCardTemplate(recipe) {
             </div>
             <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
               <button
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300 see-recipe-button">
                 See Full Recipe
               </button>
               <a href=${strYoutube} target="_blank"
                 class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
-                Watch Tutorial <i class="fa-brands fa-youtube"></i>
+                Watch Tutorial <i class="fab fa-youtube"></i>
               </a>
             </div>
           `;
@@ -68,6 +69,11 @@ export function displayRecipes(recipesArray, pageNumber = 1) {
   const paginatedRecipes = recipesArray.slice(start, end);
   paginatedRecipes.forEach((recipe) => {
     const cardTemplate = createCardTemplate(recipe);
+    cardTemplate
+      .querySelector('.see-recipe-button')
+      .addEventListener('click', () => {
+        fetchRecipeDetails(recipe.idMeal);
+      });
     recipeCardsContainer.appendChild(cardTemplate);
   });
   createPaginationButtons(recipesArray, 'search');
@@ -146,6 +152,11 @@ export function displayRecipesByCategories(recipesArray, pageNumber = 1) {
   const paginatedRecipes = recipesArray.slice(start, end);
   paginatedRecipes.forEach((recipe) => {
     const cardTemplate = createCardCategoryRecipeTemplate(recipe);
+    cardTemplate
+      .querySelector('.see-recipe-button')
+      .addEventListener('click', () => {
+        fetchRecipeDetails(recipe.idMeal);
+      });
     recipeCardsContainer.appendChild(cardTemplate);
   });
   createPaginationButtons(recipesArray, 'categories');
@@ -169,12 +180,133 @@ export function createCardCategoryRecipeTemplate(recipe) {
               </div>
               <div class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
                 <button
-                  class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                  class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300 see-recipe-button">
                   See Full Recipe
                 </button>
               </div>
             `;
   return cardTemplate;
+}
+
+export function displayRecipeDetails(recipe) {
+  const {
+    strMeal,
+    strMealThumb,
+    strTags,
+    strArea,
+    strCategory,
+    strInstructions,
+    strIngredient1,
+    strIngredient2,
+    strIngredient3,
+    strIngredient4,
+    strIngredient5,
+    strIngredient6,
+    strIngredient7,
+    strIngredient8,
+    strIngredient9,
+    strIngredient10,
+    strIngredient11,
+    strIngredient12,
+    strIngredient13,
+    strIngredient14,
+    strIngredient15,
+    strIngredient16,
+    strIngredient17,
+    strIngredient18,
+    strIngredient19,
+    strIngredient20,
+    strMeasure1,
+    strMeasure2,
+    strMeasure3,
+    strMeasure4,
+    strMeasure5,
+    strMeasure6,
+    strMeasure7,
+    strMeasure8,
+    strMeasure9,
+    strMeasure10,
+    strMeasure11,
+    strMeasure12,
+    strMeasure13,
+    strMeasure14,
+    strMeasure15,
+    strMeasure16,
+    strMeasure17,
+    strMeasure18,
+    strMeasure19,
+    strMeasure20,
+    strYoutube,
+  } = recipe;
+
+  const recipeTemplate = document.createElement('div');
+  // recipeTemplate.className = 'overflow-hidden shadow-lg flex flex-col';
+  /*
+  <!-- 
+  */
+  recipeTemplate.innerHTML = `
+          <div class="flex flex-col md:flex-row recipe-details gap-y-8 md:gap-x-8">
+          <div class="min-w-[300px] md:min-w-[500px]">
+          <div class="relative">
+            <img src="${strMealThumb}" alt="${strMeal}" class="w-full rounded-lg" />
+            <button
+                class="text-xs absolute top-0 right-0 bg-orange-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-orange-600 transition duration-300">
+                ${strArea}
+              </button>
+              <button
+                class="text-xs absolute top-0 left-0 bg-orange-600 px-4 py-2 text-white mt-3 ml-3 hover:bg-white hover:text-orange-600 transition duration-300">
+                ${strCategory}
+              </button>
+          </div>
+          </div>
+          <div class="flex flex-col gap-y-8">
+            <h2 class="text-4xl md:text-5xl font-bold">${strMeal}</h2>
+            <div class="flex items-center gap-x-4">
+              <span class="text-gray-600">Ingredients:</span>
+              <span class="text-orange-700">
+              ${strIngredient1 ? `${strIngredient1}: ${strMeasure1},` : ''}
+              ${strIngredient2 ? `${strIngredient2}: ${strMeasure2},` : ''}
+              ${strIngredient3 ? `${strIngredient3}: ${strMeasure3},` : ''}
+              ${strIngredient4 ? `${strIngredient4}: ${strMeasure4},` : ''}
+              ${strIngredient5 ? `${strIngredient5}: ${strMeasure5},` : ''}
+              ${strIngredient6 ? `${strIngredient6}: ${strMeasure6},` : ''}
+              ${strIngredient7 ? `${strIngredient7}: ${strMeasure7},` : ''}
+              ${strIngredient8 ? `${strIngredient8}: ${strMeasure8},` : ''}
+              ${strIngredient9 ? `${strIngredient9}: ${strMeasure9},` : ''}
+              ${strIngredient10 ? `${strIngredient10}: ${strMeasure10},` : ''}
+              ${strIngredient11 ? `${strIngredient11}: ${strMeasure11},` : ''}
+              ${strIngredient12 ? `${strIngredient12}: ${strMeasure12},` : ''}
+              ${strIngredient13 ? `${strIngredient13}: ${strMeasure13},` : ''}
+              ${strIngredient14 ? `${strIngredient14}: ${strMeasure14},` : ''}
+              ${strIngredient15 ? `${strIngredient15}: ${strMeasure15},` : ''}
+              ${strIngredient16 ? `${strIngredient16}: ${strMeasure16},` : ''}
+              ${strIngredient17 ? `${strIngredient17}: ${strMeasure17},` : ''}
+              ${strIngredient18 ? `${strIngredient18}: ${strMeasure18},` : ''}
+              ${strIngredient19 ? `${strIngredient19}: ${strMeasure19},` : ''}
+              ${strIngredient20 ? `${strIngredient20}: ${strMeasure20},` : ''}
+              </span>
+            </div>
+
+            
+              
+            
+
+            <p class="text-gray-600">${strInstructions}</p>
+
+            <div class="flex items-center gap-x-4">
+              <a href="#" target="_blank"
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                Add or Delete Favorite
+              </a>
+              <a href="${strYoutube}" target="_blank"
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
+                Watch Tutorial <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+          `;
+
+  pageContent.appendChild(recipeTemplate);
 }
 
 // immutable exported module values

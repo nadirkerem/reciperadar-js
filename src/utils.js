@@ -14,9 +14,13 @@ export function resetDisplay() {
   if (pageContent.querySelector('h2')) {
     pageContent.querySelector('h2').remove();
   }
+  if (pageContent.querySelector('.recipe-details')) {
+    pageContent.querySelector('.recipe-details').remove();
+  }
   const recipeCardsContainer = document.querySelector(
     '#recipe-cards-container'
   );
+
   const paginationContainer = document.querySelector('#pagination-container');
   recipeCardsContainer.innerHTML = '';
   paginationContainer.innerHTML = '';

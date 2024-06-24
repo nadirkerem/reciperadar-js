@@ -1,11 +1,10 @@
 import { shuffle, resetDisplay, displayTitle, capitalize } from './utils.js';
 import {
   displayCategories,
+  displayRecipeDetails,
   displayRecipes,
   displayRecipesByCategories,
 } from './display.js';
-
-export let currentRecipeCards = [];
 
 const searchRecipeForm = document.querySelector('#search-recipe-form');
 const searchRecipeInput = searchRecipeForm.elements['recipe-input'];
@@ -89,6 +88,19 @@ export async function randomRecipe() {
     const recipe = await response.json();
     resetDisplay();
     displayRecipes(recipe.meals);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchRecipeDetails(id) {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+    const recipe = await response.json();
+    resetDisplay();
+    displayRecipeDetails(recipe.meals[0]);
   } catch (error) {
     console.error(error);
   }
