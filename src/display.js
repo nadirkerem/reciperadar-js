@@ -1,4 +1,10 @@
 import { fetchCategoryRecipes, fetchRecipeDetails } from './fetch.js';
+import {
+  addRecipeToLocalStorage,
+  removeRecipeFromLocalStorage,
+  favoriteRecipes,
+  resetDisplay,
+} from './utils.js';
 
 const pageContent = document.querySelector('#page-content');
 const recipeCardsContainer = document.querySelector('#recipe-cards-container');
@@ -8,6 +14,7 @@ export let currentPage = 1;
 
 export function createCardTemplate(recipe) {
   const {
+    idMeal,
     strMeal,
     strMealThumb,
     strArea,
@@ -23,6 +30,9 @@ export function createCardTemplate(recipe) {
 
   const cardTemplate = document.createElement('div');
   cardTemplate.className = 'overflow-hidden shadow-lg flex flex-col';
+
+  const isFavorite = favoriteRecipes().includes(idMeal);
+
   cardTemplate.innerHTML = `
             <div class="relative">
               <img class="w-full" src=${strMealThumb} alt=${strMeal}>
@@ -37,6 +47,11 @@ export function createCardTemplate(recipe) {
                 class="text-xs absolute top-0 left-0 bg-orange-600 px-4 py-2 text-white mt-3 ml-3 hover:bg-white hover:text-orange-600 transition duration-300">
                 ${strCategory}
               </button>
+            ${
+              isFavorite
+                ? `<button class="text-4xl absolute bottom-0 right-0 text-orange-500 mb-3 mr-3 hover:text-orange-400 transition duration-300"><i class="fa-solid fa-star"></i></button>`
+                : ''
+            }
             </div>
             <div class="px-6 py-4 mb-auto">
               <a href="#"
@@ -84,6 +99,8 @@ export function createPaginationButtons(recipesArray, type) {
   const paginationContainer = document.querySelector('#pagination-container');
 
   paginationContainer.innerHTML = '';
+
+  if (numberOfPages === 1) return;
 
   for (let i = 1; i <= numberOfPages; i++) {
     const button = document.createElement('button');
@@ -163,16 +180,22 @@ export function displayRecipesByCategories(recipesArray, pageNumber = 1) {
 }
 
 export function createCardCategoryRecipeTemplate(recipe) {
-  const { strMeal, strMealThumb } = recipe;
+  const { idMeal, strMeal, strMealThumb } = recipe;
 
   const cardTemplate = document.createElement('div');
   cardTemplate.className = 'overflow-hidden shadow-lg flex flex-col';
+  const isFavorite = favoriteRecipes().includes(idMeal);
   cardTemplate.innerHTML = `
               <div class="relative">
                 <img class="w-full" src=${strMealThumb} alt=${strMeal}>
                 <div
                   class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
                 </div>
+                ${
+                  isFavorite
+                    ? `<button class="text-4xl absolute bottom-0 right-0 text-orange-500 mb-3 mr-3 hover:text-orange-400 transition duration-300"><i class="fa-solid fa-star"></i></button>`
+                    : ''
+                }
               </div>
               <div class="px-6 py-4 mb-auto">
                 <a href="#"
@@ -190,9 +213,9 @@ export function createCardCategoryRecipeTemplate(recipe) {
 
 export function displayRecipeDetails(recipe) {
   const {
+    idMeal,
     strMeal,
     strMealThumb,
-    strTags,
     strArea,
     strCategory,
     strInstructions,
@@ -240,10 +263,9 @@ export function displayRecipeDetails(recipe) {
   } = recipe;
 
   const recipeTemplate = document.createElement('div');
-  // recipeTemplate.className = 'overflow-hidden shadow-lg flex flex-col';
-  /*
-  <!-- 
-  */
+
+  const isFavorite = favoriteRecipes().includes(idMeal);
+
   recipeTemplate.innerHTML = `
           <div class="flex flex-col md:flex-row recipe-details gap-y-8 md:gap-x-8">
           <div class="min-w-[300px] md:min-w-[500px]">
@@ -257,6 +279,11 @@ export function displayRecipeDetails(recipe) {
                 class="text-xs absolute top-0 left-0 bg-orange-600 px-4 py-2 text-white mt-3 ml-3 hover:bg-white hover:text-orange-600 transition duration-300">
                 ${strCategory}
               </button>
+              ${
+                isFavorite
+                  ? `<button class="text-4xl absolute bottom-0 right-0 text-orange-500 mb-3 mr-3 hover:text-orange-400 transition duration-300"><i class="fa-solid fa-star"></i></button>`
+                  : ''
+              }
           </div>
           </div>
           <div class="flex flex-col gap-y-8">
@@ -287,10 +314,12 @@ export function displayRecipeDetails(recipe) {
             </div>
             <p class="text-gray-600">${strInstructions}</p>
             <div class="flex items-center gap-x-4">
-              <a href="#" target="_blank"
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
-                Add or Delete Favorite
-              </a>
+              <button
+                class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300 ${
+                  isFavorite ? 'remove-favorite-button' : 'add-favorite-button'
+                }">
+                ${isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+              </button>
               <a href="${strYoutube}" target="_blank"
                 class="px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg hover:bg-orange-800 transition duration-300">
                 Watch Tutorial <i class="fa-brands fa-youtube"></i>
@@ -298,6 +327,24 @@ export function displayRecipeDetails(recipe) {
             </div>
           </div>
           `;
+
+  if (isFavorite) {
+    recipeTemplate
+      .querySelector('.remove-favorite-button')
+      .addEventListener('click', () => {
+        removeRecipeFromLocalStorage(idMeal);
+        resetDisplay();
+        displayRecipeDetails(recipe);
+      });
+  } else {
+    recipeTemplate
+      .querySelector('.add-favorite-button')
+      .addEventListener('click', () => {
+        addRecipeToLocalStorage(idMeal);
+        resetDisplay();
+        displayRecipeDetails(recipe);
+      });
+  }
 
   pageContent.appendChild(recipeTemplate);
 }

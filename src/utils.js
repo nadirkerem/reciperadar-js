@@ -43,3 +43,22 @@ export function capitalize(sentence) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ');
 }
+
+export function favoriteRecipes() {
+  const recipes = JSON.parse(localStorage.getItem('favorite-recipes')) || [];
+  return recipes;
+}
+
+export function addRecipeToLocalStorage(recipeID) {
+  const recipes = JSON.parse(localStorage.getItem('favorite-recipes')) || [];
+  if (!recipes.includes(recipeID)) {
+    recipes.push(recipeID);
+    localStorage.setItem('favorite-recipes', JSON.stringify(recipes));
+  }
+}
+
+export function removeRecipeFromLocalStorage(recipeID) {
+  const recipes = JSON.parse(localStorage.getItem('favorite-recipes')) || [];
+  const updatedRecipes = recipes.filter((recipe) => recipe !== recipeID);
+  localStorage.setItem('favorite-recipes', JSON.stringify(updatedRecipes));
+}

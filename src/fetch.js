@@ -1,4 +1,10 @@
-import { shuffle, resetDisplay, displayTitle, capitalize } from './utils.js';
+import {
+  shuffle,
+  resetDisplay,
+  displayTitle,
+  capitalize,
+  favoriteRecipes,
+} from './utils.js';
 import {
   displayCategories,
   displayRecipeDetails,
@@ -35,7 +41,8 @@ export async function searchForRecipe(e) {
     );
     const recipes = await response.json();
     if (recipes.meals === null) {
-      alert('No recipe found! Please try another recipe name.');
+      resetDisplay();
+      displayTitle('No recipe found! Please try another recipe name.');
       return;
     }
     resetDisplay();
@@ -101,6 +108,28 @@ export async function fetchRecipeDetails(id) {
     const recipe = await response.json();
     resetDisplay();
     displayRecipeDetails(recipe.meals[0]);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchFavoriteRecipes() {
+  try {
+    const recipes = favoriteRecipes();
+    resetDisplay();
+    displayTitle('Favorite Recipes');
+    if (recipes.length === 0) {
+      displayTitle('No favorite recipes found!');
+      return;
+    }
+    for (const recipeID of recipes) {
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`
+      );
+      const recipe = await response.json();
+      console.log(recipe);
+      displayRecipes(recipe.meals);
+    }
   } catch (error) {
     console.error(error);
   }
