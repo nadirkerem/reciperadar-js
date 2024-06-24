@@ -57,7 +57,9 @@ export async function fetchCategories() {
     const categories = await response.json();
     resetDisplay();
     displayTitle('Categories');
-    categories.categories.forEach((category) => displayCategories(category));
+    categories.categories.forEach((category) => {
+      displayCategories(category);
+    });
     searchRecipeInput.value = '';
   } catch (error) {
     console.error(error);

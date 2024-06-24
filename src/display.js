@@ -1,4 +1,4 @@
-import { currentRecipeCards, fetchCategoryRecipes } from './fetch.js';
+import { fetchCategoryRecipes } from './fetch.js';
 
 const recipeCardsContainer = document.querySelector('#recipe-cards-container');
 
@@ -88,13 +88,13 @@ export function createPaginationButtons(recipesArray, type) {
     }`;
     button.textContent = i;
     button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       currentPage = i;
       if (type === 'search') {
         displayRecipes(recipesArray, i);
       } else if (type === 'categories') {
         displayRecipesByCategories(recipesArray, i);
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     paginationContainer.appendChild(button);
   }
@@ -132,7 +132,10 @@ export function displayCategories(category) {
     '.see-recipes-button'
   );
   seeRecipesButtons.forEach((button) => {
-    button.addEventListener('click', () => fetchCategoryRecipes(strCategory));
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      fetchCategoryRecipes(strCategory);
+    });
   });
 }
 
