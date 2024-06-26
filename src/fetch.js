@@ -127,7 +127,6 @@ export async function fetchFavoriteRecipes() {
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`
       );
       const recipe = await response.json();
-      console.log(recipe);
       displayRecipes(recipe.meals);
     }
   } catch (error) {
