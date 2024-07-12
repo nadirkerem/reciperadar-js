@@ -122,13 +122,15 @@ export async function fetchFavoriteRecipes() {
       displayTitle('No favorite recipes found!');
       return;
     }
+    const fetchedFavoriteRecipes = [];
     for (const recipeID of recipes) {
       const response = await fetch(
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`
       );
       const recipe = await response.json();
-      displayRecipes(recipe.meals);
+      fetchedFavoriteRecipes.push(recipe.meals[0]);
     }
+    displayRecipes(fetchedFavoriteRecipes);
   } catch (error) {
     console.error(error);
   }
